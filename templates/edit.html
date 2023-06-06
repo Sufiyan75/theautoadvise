@@ -1,0 +1,84 @@
+{% extends "admin_layout.html" %}
+{% block body %}
+<!-- Page Header-->
+        <header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/image/admin-bg.jpg') }}'">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Admin Dashboard</h1>
+                            <span class="subheading">"Efficiently Manage Your Posts with Ease: The Ultimate Admin Panel Solution"</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-9 mx-auto">
+                    <h1 align="center">Manage Posts</h1><hr>
+                    <form id="contactForm" data-sb-form-api-token="API_TOKEN" method="post" action="/edit/{{sno}}" enctype="multipart/form-data">
+                                <div class="form-floating">
+                                    <input class="form-control" id="suname" name="suname" type="text" value="{{postedit['sender_uname']}}" placeholder="Sender Name..." />
+                                    <label for="title">Sender Username</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="sname" name="sname" type="text" value="{{postedit['sender_name']}}" placeholder="Sender Name..." />
+                                    <label for="title">Sender Name</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="title" name="title" type="text" value="{{postedit['title']}}" placeholder="Enter title..." />
+                                    <label for="title">Title</label>
+                                    <div class="invalid-feedback" data-sb-feedback="name:required">Title is required.</div>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="tline" name="tline" type="text" placeholder="Enter Tag Line..." value="{{postedit['subtitle']}}" data-sb-validations="required,email" />
+                                    <label for="tline">Sub Title</label>
+                                    <div class="invalid-feedback" data-sb-feedback="email:required">Tag Line is required.</div>
+                                    <div class="invalid-feedback" data-sb-feedback="email:email">Tag Line is not valid.</div>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="slug" name="slug" type="text" placeholder="Enter Slug..." value="{{postedit['slug']}}" data-sb-validations="required" />
+                                    <label for="phone">Slug</label>
+                                    <div class="invalid-feedback" data-sb-feedback="phone:required">Slug is required.</div>
+                                </div>
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="content" name="content" placeholder="Enter your Content here..." style="height: 20rem" data-sb-validations="required">{{postedit['content']}}</textarea>
+                                    <label for="message">Content</label>
+                                    <div class="invalid-feedback" data-sb-feedback="message:required">A Content is required.</div>
+                                </div>
+                                <br />
+                                 <div class="form-floating">
+                                    <input title="By choosing a new file the old file will be replaced by new file!" class="form-control" id="img_file" name="img_file" type="text" placeholder="Enter Image File..." value="{{postedit['img_file']}}" data-sb-validations="required"  readonly="readonly" />
+                                    <label>Current Image File:</label>
+                                    <input class="form-control" type="file" value="{{postedit['img_file']}}" name="file1" accept=".png,.jpeg,.jpg,.svg" title="{{postedit['img_file']}}">
+                                </div>
+                                <br />
+                                <!-- Submit success message-->
+                                <!---->
+                                <!-- This is what your users will see when the form-->
+                                <!-- has successfully submitted-->
+                                <div class="d-none" id="submitSuccessMessage">
+                                    <div class="text-center mb-3">
+                                        <div class="fw-bolder">Form submission successful!</div>
+                                        To activate this form, sign up at
+                                        <br />
+                                        <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                                    </div>
+                                </div>
+                                <!-- Submit error message-->
+                                <!---->
+                                <!-- This is what your users will see when there is-->
+                                <!-- an error submitting the form-->
+                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                                <!-- Submit Button-->
+                                <div class="container mb-3">
+                                    <a href="/dashboard#manageposts"><button class="btn btn-primary text-uppercase" style="float: left;" id="submitButton" type="button">Back</button></a>
+                                <button class="btn btn-primary text-uppercase" style="float: right;" id="submitButton" type="submit">Submit</button>
+                                </div><br><br>
+                            </form>
+                </div>
+            </div>
+        </div>
+{% endblock %}

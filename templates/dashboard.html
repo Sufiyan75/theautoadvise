@@ -1,0 +1,166 @@
+  {% extends "admin_layout.html" %}
+  {% block body %}
+  <!-- Page Header-->
+          <header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/image/admin-bg.jpg') }}'">
+              <div class="container position-relative px-4 px-lg-5">
+                  <div class="row gx-4 gx-lg-5 justify-content-center">
+                      <div class="col-md-10 col-lg-8 col-xl-7">
+                        {% if msg %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                          <strong>Success!</strong> {{msg}}
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        {% endif %}
+                          <div class="site-heading">
+                              <h1>Admin Dashboard</h1>
+                              <span class="subheading">Efficiently Manage Your Website with Ease: The Ultimate Admin Panel Solution</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </header>
+          <!-- Main Content-->
+          <div class="container mb-4">
+            <div class="row">
+              <div class="col-md-10 col-lg-8 mx-auto">
+          			 <h1 align="center" id="manageposts">Manage Posts</h1><hr>
+          			 <table class="table-responsive">
+          					<thead align="center">
+                      <tr>
+            					  <th scope="col">Sno.</th>
+            					  <th scope="col">Title</th>
+                        <th scope="col">Posted By</th>
+        					      <th scope="col">Date</th>
+        					      <th scope="col">Edit</th>
+        					      <th scope="col">Delete</th>
+      					     </tr>
+          					</thead>
+  					        <tbody>
+                      {% if contacts|length > 0 %}
+                        {% set cnt = namespace(value=1) %}
+                      {% for post in postdash %}
+                      <tr>
+                        <th scope="row">{{cnt.value}}</th>
+                        <td>{{post['title']}}</td>
+                                  <td>{{post['sender_name']}}</td>
+                        <td>{{post['date']}}</td>
+                        <td>
+                          <a href="/edit/{{post.sno}}">
+                            <button class="btn btn-primary">Edit</button>
+                          </a>
+                        </td>
+                        <td>
+                          <a href="/delete/{{post.sno}}">
+                              <button class="btn btn-primary">Delete</button>
+                          </a>
+                        </td>
+                      </tr>
+                      {% set cnt.value = cnt.value + 1 %}
+                      {% endfor %}
+                      {% else %}
+                          <tr>
+                              <td colspan="8">No Post Available</th>
+                          </tr>
+                    {% endif %}
+        					  </tbody>
+        					</table>
+                  <style type="text/css">
+                      table {
+                            width: 100%;
+                            border-collapse: collapse;
+                          }
+
+                          th, td {
+                            border: 1px solid #ddd;
+                            padding: 10px;
+                            text-align: center;
+                          }
+
+                          thead {
+                            background-color: #f2f2f2;
+                          }
+
+                          tr:nth-child(even) {
+                            background-color: #f9f9f9;
+                          }
+                  </style><br>
+                  <div class="mb-5">
+                      <h5 align="right">
+                          <a class="btn btn-primary" style="text-decoration: none;" href="/edit/0"><b>Create Your Own Post!</b>
+                          </a>
+                      </h5>
+                  </div>
+          		</div>
+          	</div>
+            <br><hr><br><br>
+            <div class="row">
+              <div class="col-md-10 col-lg-8 mx-auto">
+                 <h1 align="center" id="managefdbk">Manage Feedback</h1><hr>
+                 <table class="table-responsive">
+                    <thead align="center">
+                      <tr>
+                        <th scope="col">Sno.</th>
+                        <th scope="col">Sender Name</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone No.</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Reply</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Delete Status</th>
+                        <th scope="col">Action</th>
+                     </tr>
+                    </thead>
+                    <tbody>
+                      {% if contacts|length > 0 %}
+                        {% set cnt = namespace(value=1) %}
+                      {% for contact in contacts %}
+                      <tr>
+                        <th scope="row">{{cnt.value}}</th>
+                        <td>{{contact['name']}}</td>
+                        <td>{{contact['username']}}</td>
+                        <td>{{contact['email']}}</td>
+                        <td>{{contact['phone_num']}}</td>
+                        <td>{{contact['msg']}}</td>
+                        <td>{{contact['reply']}}</td>
+                        <td>{{contact['date']}}</td>
+                        <td>{{contact['status']}}</td>
+                        <td>{{contact['delete_status']}}</td>
+                        <td>
+                          {% if contact.status == "Readed" and contact.delete_status == "No" %}
+                            <a href="/view_contact/{{contact.sno}}">
+                              <i class="fa-solid fa-file"></i>
+                            </a>
+                          {% elif contact.status == "Unreaded" and contact.delete_status == "No" %}
+                            <a href="/reply_contact/{{contact.sno}}">
+                              <i class="fa-solid fa-reply"></i>
+                            </a>
+                          {% elif contact.status == "Readed" and contact.delete_status == "Yes" %}
+                            <a href="/view_contact/{{contact.sno}}">
+                              <i class="fa-solid fa-file"></i>
+                            </a>
+                          {% elif contact.status == "Unreaded" and contact.delete_status == "Yes" %}
+                            <a href="/view_contact/{{contact.sno}}">
+                              <i class="fa-solid fa-file"></i>
+                            </a>
+                          {% endif %}
+                        </td>
+                      </tr>
+                      {% set cnt.value = cnt.value + 1 %}
+                      {% endfor %}
+                      {% else %}
+                          <tr>
+                              <td colspan="8">No Feedback Available</th>
+                          </tr>
+                    {% endif %}
+                    </tbody>
+                  </table>
+
+                  <br>
+              </div>
+            </div>
+          </div>
+  {% endblock %}

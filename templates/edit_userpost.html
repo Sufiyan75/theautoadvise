@@ -1,0 +1,84 @@
+{% extends "user_layout.html" %}
+{% block body %}
+<!-- Page Header-->
+        <header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/image/user-bg.jpg') }}'">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        {% if error %}
+                                     <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                          <strong>Success!</strong> {{error}}
+                                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                          </button>
+                                     </div>
+                                {% endif %}
+                        <div class="site-heading">
+                            <h1>User Dashboard</h1>
+                            <span class="subheading">Your personalized hub for managing your account and exploring features</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-9 mx-auto">
+                    <h1 align="center">Manage/New Post</h1><hr>
+                    <form id="contactForm" data-sb-form-api-token="API_TOKEN" method="post" action="/edit_userpost/{{sno}}" enctype="multipart/form-data">
+                                <div class="form-floating">
+                                    <input class="form-control" id="sname" name="sname" type="text" value="{{postedit['sender_name']}}" placeholder="Sender Name..." required="required" />
+                                    <label for="title">Sender Name</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="title" name="title" type="text" value="{{postedit['title']}}" placeholder="Enter title..." required="required"/>
+                                    <label for="title">Title</label>
+                                    <div class="invalid-feedback" data-sb-feedback="name:required">Title is required.</div>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="tline" name="tline" type="text" placeholder="Enter Tag Line..." value="{{postedit['subtitle']}}" data-sb-validations="required,email" required="required" />
+                                    <label for="tline">Sub Title</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="slug" name="slug" type="text" placeholder="Enter Slug..." value="{{postedit['slug']}}" required="required" />
+                                    <label for="phone">Slug</label>
+                                </div>
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="content" name="content" placeholder="Enter your Content here..." style="height: 20rem" required="required">{{postedit['content']}}</textarea>
+                                    <label for="message">Content</label>
+                                    <div class="invalid-feedback" data-sb-feedback="message:required">A Content is required.</div>
+                                </div>
+                                <div class="form-floating">
+                                    <input title="By choosing a new file the old file will be replaced by new file!" class="form-control" id="img_file" name="img_file" type="text" placeholder="Enter Image File..." value="{{postedit['img_file']}}" readonly="readonly" />
+                                    <label>Current Image File:</label>
+                                    <input class="form-control" type="file" value="{{postedit['img_file']}}" name="file1" accept=".png,.jpeg,.jpg,.svg" title="{{postedit['img_file']}}">
+                                </div>
+                                <br />
+                                <!-- Submit success message-->
+                                <!---->
+                                <!-- This is what your users will see when the form-->
+                                <!-- has successfully submitted-->
+                                <div class="d-none" id="submitSuccessMessage">
+                                    <div class="text-center mb-3">
+                                        <div class="fw-bolder">Form submission successful!</div>
+                                        To activate this form, sign up at
+                                        <br />
+                                        <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                                    </div>
+                                </div>
+                                <!-- Submit error message-->
+                                <!---->
+                                <!-- This is what your users will see when there is-->
+                                <!-- an error submitting the form-->
+                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                                <!-- Submit Button-->
+                                <div class="container mb-3">
+                                    <a href="/login_user"><button class="btn btn-primary text-uppercase" style="float: left;" id="submitButton" type="button">Back</button></a>
+                                <button class="btn btn-primary text-uppercase" style="float: right;" id="submitButton" type="submit">Submit</button>
+                                </div><br><br>
+                            </form>
+                </div>
+            </div>
+        </div>
+{% endblock %}

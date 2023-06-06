@@ -1,0 +1,36 @@
+{% extends "admin_layout.html" %}
+{% block body %}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url(' {{ url_for('static', filename='assets/image/bg2.jpg') }}'">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            <h1>About</h1>
+                            <h1>{{params['title']}}</h1>
+                            <span class="subheading">This is what I do.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-9 mx-auto">
+                    <h1 align="center">About</h1><hr>
+                    <form id="contactForm" data-sb-form-api-token="API_TOKEN" method="post" action="/about_ad">
+                        <div class="form-floating">
+                            <textarea style="height: 20rem" class="form-control" name="about" required="required">{{about.about}}</textarea>
+                            <label for="tline" class="rq">About</label>
+                        </div><br>
+                        <!-- Submit Button-->
+                        <div class="container mb-3">
+                            <a href="/login_user"><button class="btn btn-primary text-uppercase" style="float: left;" id="submitButton" type="button">Back</button></a>
+                        <button class="btn btn-primary text-uppercase" style="float: right;" id="submitButton" type="submit">Submit</button>
+                        </div><br><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+{% endblock %}

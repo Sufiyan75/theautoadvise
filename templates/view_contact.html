@@ -1,0 +1,82 @@
+  {% extends "admin_layout.html" %}
+  {% block body %}
+  <!-- Page Header-->
+          <header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/image/admin-bg.jpg') }}'">
+              <div class="container position-relative px-4 px-lg-5">
+                  <div class="row gx-4 gx-lg-5 justify-content-center">
+                      <div class="col-md-10 col-lg-8 col-xl-7">
+                        {% if msg %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                          <strong>Success!</strong> {{msg}}
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        {% endif %}
+                          <div class="site-heading">
+                              <h1>Admin Dashboard</h1>
+                              <span class="subheading">Efficiently Manage Your Website with Ease: The Ultimate Admin Panel Solution</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </header>
+          <!-- Main Content-->
+          <div class="container mb-4">
+            <div class="row">
+              <div class="col-md-10 col-lg-8 mx-auto">
+                 <h1 align="center">View Feedback</h1><hr>
+                 <table class="table-responsive">
+                    <thead align="center">
+                      <tr>
+                        <th scope="col">Sender Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone No.</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Reply</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Status</th>
+                     </tr>
+                    </thead>
+                    <tbody>
+                        <td>{{contact['name']}}</td>
+                        <td>{{contact['email']}}</td>
+                        <td>{{contact['phone_num']}}</td>
+                        <td>{{contact['msg']}}</td>
+                        <td>{{contact['reply']}}</td>
+                        <td>{{contact['date']}}</td>
+                        <td>{{contact['status']}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <style type="text/css">
+                      table {
+                            width: 100%;
+                            border-collapse: collapse;
+                          }
+
+                          th, td {
+                            border: 1px solid #ddd;
+                            padding: 10px;
+                            text-align: center;
+                          }
+
+                          thead {
+                            background-color: #f2f2f2;
+                          }
+
+                          tr:nth-child(even) {
+                            background-color: #f9f9f9;
+                          }
+                          td:nth-child(6) {
+                            width: 50%; /* Adjust the width value as needed */
+                        }
+                  </style><br>
+                  <br>
+                  <div class="container mb-4">
+                    <a href="/dashboard#managefdbk"><button class="btn btn-primary home" style="float: left;" type="button">Back</button></a>
+                  </div>
+              </div>
+            </div>
+          </div>
+  {% endblock %}

@@ -1,0 +1,19 @@
+{
+    "params":
+{
+    "local_server" : "True",
+    "local_uri" : "mysql://root:@localhost/theautoadvise",
+    "prod_uri" : "mysql://root:@localhost/theautoadvise",
+    "fb_url" : "https://www.facebook.com/profile.php?id=100092276871309",
+    "ig_url" : "https://www.instagram.com/sufiyan_ansari_99/",
+    "gh_url" : "https://github.com/Sufiyan75",
+    "gmail-user" : "youremail@gmail.com",
+    "gmail-pass" : "yourpassword",
+    "title" : "The Auto Advise",
+    "rows" : 5,
+    "logo" : "logo.png",
+    "admin_user" : "admin",
+    "admin_pass" : "admin1234",
+    "upload_location" : "C:\\Sufiyan\\The Auto Advise\\static\\assets\\postimg"
+}
+}

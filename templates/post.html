@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block body %}
+        <!-- Page Header-->
+        {% set fname = 'assets/postimg/' + posts.img_file %}
+        <header class="masthead" style="background-image: url('{{ url_for('static', filename=fname) }}'">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>{{posts['title']}}</h1>
+                            <span class="meta">
+                                Posted by
+                                <a href="/about_user/{{posts.sender_name}}" style="text-decoration: none;"><b>{{posts.sender_name}}</b></a>
+                                on {{ posts['date'] }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2 class="subheading">{{posts['subtitle']}}</h2>
+                        <textarea id="postContent" class="form-control auto-resize" readonly="readonly">{{posts['content']}}</textarea>
+                    </div>
+                    <div class="col-md-10 col-lg-8 col-xl-7"><hr>
+                        <h2 class="subheading">Comment</h2>
+                        <div class="comment-section">
+                            {% if comments %}
+                                {% for comment in comments%}
+                                    <p><strong>{{ comment.sender_uname }}</strong>: {{ comment.comment }}</p>
+                                {% endfor %}
+                                <form action="/comment_add/{{ posts.slug }}" method="POST">
+                                   <div class="form-group">
+                                        <textarea style="width: 50%; float: left;" name="comment"  rows="3" placeholder="Add a comment" required></textarea><br>&nbsp;
+                                        <button type="submit" style="float: center;" class="btn btn-primary">&rarr;</button>
+                                    </div>
+                                </form>
+                            {% else %}
+                                <form action="/comment_add/{{ posts.slug }}" method="POST">
+                                    <div class="form-group">
+                                        <textarea style="width: 50%; float: left;" name="comment"  rows="3" placeholder="Add a comment" required></textarea><br>&nbsp;
+                                        <button type="submit" style="float: center;" class="btn btn-primary">&rarr;</button>
+                                    </div>
+                                </form>
+                            {% endif %}
+                    </div><br><hr>
+                    <a href="/#trending"><button type="button" class="btn btn-primary">Back</button></a><br><br>
+                </div>
+            </div>
+        </article>
+{% endblock %}
